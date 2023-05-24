@@ -1,0 +1,405 @@
+<br>
+<h1>AUTOMATIC TIME TABLE GENERATOR FOR INDIVIDUAL FACULTY</h1>
+
+<div>
+<form [formGroup]="userProfileForm" (ngSubmit)="onSelect()" >
+  <div class="container">
+   <mat-card>
+  <br>
+  <br>
+  <br>
+    <div class="flex-container">
+      <div class="flex-item3">
+        <!-- <form class="example-form"> -->
+          <mat-form-field class="example-full-width" appearance="fill" >
+            <mat-label>Staff Id</mat-label>
+            <input
+            class="filter"
+            matInput
+            (keyup)="apply_Filter_id($event)"
+            #input
+            type="text"
+            [matAutocomplete]="auto3"
+            [formControl]="my_Control_id"
+            matInput
+            [(ngModel)]="formdata.id" 
+            formControlName="id" 
+            id="id"
+            required 
+          />
+          <mat-error *ngIf="checkErrorUserForm('staffidFormControl', 'required')">
+            Staffs Id is <strong>required</strong>
+          </mat-error>
+          <mat-autocomplete  #auto3="matAutocomplete" (optionSelected)="onSelectionChangeid($event.option.value) " >
+            <mat-option
+            *ngFor="let optionssss of filteredOption_id | async" [value]="optionssss" class="option" >
+           
+             {{ optionssss }}
+      
+          </mat-option>
+          
+            
+          </mat-autocomplete>
+      
+          </mat-form-field>
+        <!-- </form> -->
+      </div>
+      <div class="flex-item1">
+          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Staffs</mat-label>
+          <input
+          class="filter"
+          matInput
+          (keyup)="apply_Filter_staff($event)"
+          #input
+          type="text"
+          [matAutocomplete]="auto1"
+          [formControl]="my_Control_staffs"
+          matInput
+          [(ngModel)]="formdata.staffs"
+          formControlName="staffssname" 
+          id="staffssname"
+          required 
+        />
+        <mat-error *ngIf="checkErrorUserForm('staffsFormControl', 'required')">
+          Staffs is <strong>required</strong>
+        </mat-error>
+        <mat-autocomplete  #auto1="matAutocomplete" (optionSelected)="onSelectionChangestaffs($event.option.value) " >
+          <mat-option
+          *ngFor="let option of filteredOption_staff | async" [value]="option" class="option" >
+           {{ option }}
+        </mat-option> 
+        </mat-autocomplete>          
+        </mat-form-field>
+          </div>
+          <div class="flex-item2">
+            <mat-form-field class="example-full-width" appearance="fill" >
+              <mat-label>Regulaions</mat-label>
+              <input
+              class="filter"
+              matInput
+              (keyup)="apply_Filter_reg($event)"
+              #input
+              type="text"
+              [matAutocomplete]="auto5"
+              [formControl]="my_Control_reg"
+              matInput
+              [(ngModel)]="formdata.regulattion" 
+              formControlName="regulation" 
+              id="regulation"
+              required 
+            />
+
+            <mat-error *ngIf="checkErrorUserForm('regulattionFormControl', 'required')">
+              Regulations is <strong>required</strong>
+            </mat-error>
+            <mat-autocomplete  #auto5="matAutocomplete"  (optionSelected)="onSelectionChange($event.option.value)">
+              <mat-option
+              *ngFor="let optionssss of filteredOption_reg | async" [value]="optionssss" class="option" >
+             
+               {{ optionssss }}
+        
+            </mat-option>
+            
+              
+            </mat-autocomplete>
+          
+            </mat-form-field>
+        </div>
+      
+    </div>
+  
+  <br><br>
+  
+    <div class="flex-container">
+        <div class="flex-item2">
+            <mat-form-field class="example-full-width" appearance="fill" >
+              <mat-label>Department</mat-label>
+              <input
+              class="filter"
+              matInput
+              (keyup)="apply_Filter_dept($event)"
+              #input
+              type="text"
+              [matAutocomplete]="autodept"
+              [formControl]="my_Control_dept"
+              matInput
+              [(ngModel)]="formdata.dept"
+              formControlName="deptname" 
+              id="deptname"
+              required
+            />
+            <mat-error *ngIf="checkErrorUserForm('deptFormControl', 'required')" >
+              Depatment is <strong>required</strong>
+            </mat-error>
+            <mat-autocomplete  #autodept="matAutocomplete"  (optionSelected)="onSelectionChangedept($event.option.value)">
+              <mat-option
+              *ngFor="let optionssss of filteredOption_dept | async" [value]="optionssss" class="option" >
+             
+               {{ optionssss }}
+        
+            </mat-option>
+              
+            </mat-autocomplete>
+          
+            </mat-form-field>
+        </div>
+      <div class="flex-item3">
+          <mat-form-field class="example-full-width" appearance="fill" >
+            <mat-label>Year</mat-label>
+            <input
+            class="filter"
+            matInput
+            (keyup)="apply_Filter_yearr($event)"
+            #input
+            type="text"
+            [matAutocomplete]="auto6"
+            [formControl]="my_Control_yearr"
+            matInput
+            [(ngModel)]="formdata.yearr" 
+            formControlName="year" 
+            id="year"
+            required 
+          />
+          <mat-error *ngIf="checkErrorUserForm('yearFormControl', 'required')">
+            Year is <strong>required</strong>
+          </mat-error>
+          <mat-autocomplete  #auto6="matAutocomplete" (optionSelected)="onSelectionChangeyear($event.option.value)">
+            <mat-option
+            *ngFor="let optionssss of filteredOption_yearr |async" [value]="optionssss" class="option" 
+            >
+           
+             {{ optionssss }}
+    
+      
+          </mat-option>
+          
+            
+          </mat-autocomplete>
+        
+          </mat-form-field>
+  
+  
+      </div>
+      <div class="flex-item1">
+  
+        <mat-form-field class="example-full-width" appearance="fill" >
+          <mat-label>Semester No</mat-label>
+          <input
+          class="filter"
+          matInput
+          (keyup)="apply_Filter_sem($event)"
+          #input
+          type="text"
+          [matAutocomplete]="autosem"
+          [formControl]="my_Control_sem"
+          matInput
+          [(ngModel)]="formdata.sem"
+          formControlName="semester" 
+          id="semester"
+          required
+        />
+        <mat-error *ngIf="checkErrorUserForm('semFormControl', 'required')" >
+          Semester is <strong>required</strong>
+        </mat-error>
+        <mat-autocomplete  #autosem="matAutocomplete" (optionSelected)="onSelectionChangesub($event.option.value)">
+          <mat-option
+          *ngFor="let optionssss of filteredOption_sem | async" [value]="optionssss" class="option" >
+         
+           {{ optionssss }}
+    
+        </mat-option>
+        </mat-autocomplete>
+      
+        </mat-form-field>
+    </div>
+    </div>
+    <br><br>
+    <div class="flex-container">
+    
+        <div class="flex-item2">
+            <mat-form-field class="example-full-width" appearance="fill" >
+              <mat-label>Subject</mat-label>
+              <input
+              class="filter"
+              matInput
+              (keyup)="apply_Filter_sub($event)"
+              #input
+              type="text"
+              [matAutocomplete]="autosub"
+              [formControl]="my_Control_sub"
+              matInput
+              [(ngModel)]="formdata.subb"
+            formControlName="subject" 
+            id="subject"
+            required
+  
+            />
+            <mat-error *ngIf="checkErrorUserForm('subFormControl', 'required')" >
+              Subject is <strong>required</strong>
+            </mat-error>
+            <mat-autocomplete  #autosub="matAutocomplete" (optionSelected)="onSelectionChangesubj($event.option.value)">
+              <mat-option
+              *ngFor="let optionssss of filteredOption_sub | async" [value]="optionssss" class="option" >
+             
+               {{ optionssss }}
+        
+            </mat-option>
+              
+            </mat-autocomplete>
+          
+            </mat-form-field>
+        </div>
+      <div class="flex-item3">
+          <mat-form-field class="example-full-width" appearance="fill" >
+            <mat-label>Period in Weak</mat-label>
+            <input
+            class="filter"
+            matInput
+            #input
+            type="text"
+            [formControl]="my_Control_period"
+            matInput
+           [(ngModel)]="formdata.period" 
+           formControlName="period" 
+           id="period"
+           required 
+          />
+          <mat-error *ngIf="checkErrorUserForm('periodFormControl', 'required')">
+            Period is <strong>required</strong>
+          </mat-error>
+        
+          </mat-form-field>
+  
+  
+      </div>
+      <div class="flex-item1">
+        
+        <mat-form-field class="example-full-width" appearance="fill" >
+          <mat-label>Credit</mat-label>
+          <input
+          class="filter"
+          matInput
+          #input
+          type="text"
+          [formControl]="my_Control_credit"
+          [(ngModel)]="formdata.credit" 
+          formControlName="credit" 
+          id="credit"
+          required 
+          (optionSelected)="onSelectionChangecredit($event)"
+        />
+        <mat-error *ngIf="checkErrorUserForm('creditFormControl', 'required')" >
+          Credit is <strong>required</strong>
+        </mat-error>
+        </mat-form-field> 
+    </div>
+    </div>
+    <h3>Remaining Period:{{this.storevalue}}</h3>
+    
+  </mat-card>
+  <br>
+  <br>
+  <br>
+  <div>
+    <button class="button" mat-raised-button color="primary"  (click)="onSubmit()" >Submit</button>
+  </div>
+  </div>
+</form>
+
+<br>
+<div>
+  <!-- <button class="button" mat-raised-button color="primary"  (click)="update()" >update</button> -->
+
+  <!-- <button class="adddata" mat-raised-button color="primary" (click)="adddata()" >Add Data</button> -->
+</div>
+<form >  
+</form>
+</div>
+<ng-container *ngIf="submits.length!=0">
+<div class="container">
+<div class="table-wrapper">
+  <table class="fl-table">
+      <thead>
+      <tr>
+          <th>S.No</th>
+          <th>Staff Id</th>
+          <th>Staff Name</th>
+          <th>Regulations</th>
+          <th>Department</th>
+          <th>Year</th>
+          <th>Semester</th>
+          <th>Subject</th>
+          <th>Period in week</th>
+          <th>Credit</th>
+          <th>Edit</th>
+          <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor ="let item of submits; let i =index " >
+          <td>
+                  {{i+1}}
+          </td>
+          <td>
+                {{item.id}}
+          </td>
+          <td>
+              {{item.staffssname}}
+          </td>
+          <td>
+            {{item.regulation}}
+          </td>
+          <td>
+            {{item.deptname}}
+          </td>
+          <td>
+            {{item.year}}
+          </td>
+          <td>
+            {{item.semester}}
+          </td>
+          <td>
+            {{item.subject}}
+          </td>
+          <td>
+            {{item.period}}
+          </td>
+          <td>
+            {{item.credit}}
+          </td>
+          <td>
+            <button mat-raised-button (click)="EditDetails(i)" >EDIT</button>
+          </td>
+          <td>
+            <button mat-raised-button class="btn btn-danger" (click)="deleteProduct(i)">
+            <mat-icon>delete</mat-icon>
+          </button>          
+        </td>
+      </tr>
+      <tbody>
+  </table>
+
+    <button class="adddata" mat-raised-button color="primary" (click)="finalarr()" >Generate</button>
+    <div *ngIf="totval == 'next' "><app-created-table></app-created-table></div>
+    <div *ngIf="vardept == 'next' "><app-created-table></app-created-table></div>
+    <div *ngIf="storeid == 'next' "><app-created-table></app-created-table></div>
+    <div *ngIf="temp_name == 'next' "><app-created-table></app-created-table></div>
+    <div *ngIf="tempvar_dept == 'next' "><app-created-table></app-created-table></div>
+</div>
+</div>
+
+</ng-container>
+
+
+
+
+
+
+
+    
+    
+  
+
+
+

@@ -1,0 +1,24 @@
+.table{
+	overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+body{
+  width: 100%;
+  height: 100%;
+}
+
+.butts{
+  margin-left: 90%;
+}
+/* /* .print{
+  margin-left: 94%;
+} */
+.print{
+  margin-left:4%;
+} 
+@media print {
+  button {
+    display: none;
+  }
+}
